@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  <style>
+
+
+*{
+    font-family: 'Roboto Slab', serif;
+    /* outline: 1px solid green; */
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+
+}
+
+.header{
+            width:100%;
+            background-color: rgba(34, 34, 34, 0.973);
+            color:rgb(233, 233, 233);
+            padding:20px;
+            width:100%;
+            text-align: center;
+        }
+
+#users {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    }
+
+table{
+    margin: 0 auto;
+}
+
+#users td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#users tr:nth-child(even){background-color: #f2f2f2;}
+
+users tr:hover {background-color: #ddd;}
+
+#users th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 15px;
+    text-align: left;
+    background-color: rgb(76, 155, 175);
+    color: white;
+}
+
+.header{
+    text-align: center;
+}
+
+#new_user{
+    text-decoration: none;
+}
+
+#new_user a{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    padding-left: 20px;
+    margin-left:20px;
+}
+h1, h2, h3, h4, h5, h6{
+    text-align: center;
+}
+
+
+
+</style>
+
+<body>
+    <h1 class="header">Trip</h1>
+
+    <a href="/user_dash">Home</a>
+    <a href="/logout">Logout</a>
+
+    <h3>{{trip.destination}}</h3>
+    Planned by: <p>{{trip.added_by.name}}</p>
+    <br>
+    Description: <p>{{trip.plan}}</p>
+    <br>
+    Travel Date From: <p>{{trip.start_date}}
+    <br>
+    Travel Date To: <p>{{trip.end_date}}
+
+    <h3>Other users joining the trip.</h3>
+        {%for i in user_joined%}
+        <p>{{i.user.name}}</p>
+        {%endfor%}
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  <style>
+
+
+    *{
+        font-family: 'Roboto Slab', serif;
+        /* outline: 1px solid green; */
+        margin: 0;
+        padding: 0;
+        vertical-align: top;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 100;
+
+    }
+
+    .header{
+        width:100%;
+        background-color: rgba(34, 34, 34, 0.973);
+        color:rgb(233, 233, 233);
+        padding:20px;
+        width:100%;
+        text-align: center;
+        }
+
+    #users {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 80%;
+        }
+
+    table{
+        margin: 0 auto;
+    }
+
+    #users td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #users tr:nth-child(even){background-color: #f2f2f2;}
+
+    #users tr:hover {background-color: #ddd;}
+
+    #users th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 15px;
+        text-align: left;
+        background-color: rgb(76, 155, 175);
+        color: white;
+    }
+
+    .header{
+        text-align: center;
+    }
+
+    #new_user{
+        text-decoration: none;
+    }
+
+    #new_user a{
+        text-align: center;
+    }
+
+    a{
+        text-decoration: none;
+        padding-left: 20px;
+        margin-left:20px;
+    }
+    h1, h2, h3, h4, h5, h6{
+        text-align: center;
+    }
+
+
+
+    </style>
+</head>
+<body>
+    <h1 class="header">Displaying Users</h1>
+    <a href="/logout">Logout</a>
+    <h2>Welcome Back, {{request.session.username}}</h2>
+    <h2>Your Trip Scheduales</h2>
+
+    <table id="users">
+        <tr>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+        </tr>
+
+        {% for i in user_joined%}
+        <tr>
+            <td><a href="/show/{{i.trip.id}}">{{i.trip.destination}}</a></td>
+            <td>{{i.trip.start_date}}</td>
+            <td>{{i.trip.end_date}}</td>
+            <td>{{i.trip.plan}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>Other User's Travel Plans</h2>
+
+    <table id="users">
+        <tr>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do you want to join</th>
+        </tr>
+
+        <!-- Loop through and add TR dependent on users-->
+        {% for i in all_trips%}
+        <tr>
+            <td>{{i.added_by.name}}</td>
+            <td><a href="/show/{{i.id}}">{{i.destination}}</a></td>
+            <td>{{i.start_date}}</td>
+            <td>{{i.end_date}}</td>
+            <td>
+                <a href="/joined/{{i.id}}">Join</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <br>
+    <a href="/add_trip">Add Travel Plan</a>
+
+</body>
+</html>
